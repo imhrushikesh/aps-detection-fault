@@ -1,8 +1,8 @@
-import os
+import os 
 from sensor.exception import SensorException
 from sensor.logger import logging
 from datetime import datetime
-FILE_NAME= "sensor.csv"
+FILE_NAME ="sensor.csv"
 TRAIN_FILE_NAME = "train.csv"
 TEST_FILE_NAME = "test.csv"
 
@@ -28,19 +28,16 @@ class DataIngestionConfig:
      def to_dict(self,)->dict:
         try:
             return self.__dict__
-        except Exception  as e:
-            raise SensorException(e,sys)
-    
+        except Exception as e:
+            raise SensorException(e, sys)
 
 class DataValidationConfig:
-
 
     def __init__(self,training_pipeline_config:TrainingPipelineConfig):
         self.data_validation_dir = os.path.join(training_pipeline_config.artifact_dir , "data_validation")
         self.report_file_path=os.path.join(self.data_validation_dir, "report.yaml")
         self.missing_threshold:float = 0.2
         self.base_file_path = os.path.join("aps_failure_training_set1.csv")
-
 
 class DataTransformationConfig:...
 class ModelTrainerConfig:...
