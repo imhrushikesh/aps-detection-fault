@@ -15,5 +15,7 @@ websockets==10.3
 wincertstore==0.2
 pandas
 PYAML
+numpy
 xgboost==1.6.2
+scikit-learn
 -e .
