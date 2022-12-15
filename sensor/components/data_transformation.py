@@ -2,7 +2,7 @@ from sensor.entity import artifact_entity,config_entity
 from sensor.exception import SensorException
 from sensor.logger import logging
 from typing import Optional
-import os,sys
+import os,sys 
 from sklearn.pipeline import Pipeline
 import pandas as pd
 from sensor import utils
@@ -40,12 +40,13 @@ class DataTransformation:
         except Exception as e:
             raise SensorException(e, sys)
 
+
     def initiate_data_transformation(self,) -> artifact_entity.DataTransformationArtifact:
         try:
             #reading training and testing file
             train_df = pd.read_csv(self.data_ingestion_artifact.train_file_path)
             test_df = pd.read_csv(self.data_ingestion_artifact.test_file_path)
-
+            
             #selecting input feature for train and test dataframe
             input_feature_train_df=train_df.drop(TARGET_COLUMN,axis=1)
             input_feature_test_df=test_df.drop(TARGET_COLUMN,axis=1)
@@ -68,9 +69,9 @@ class DataTransformation:
             #transforming input features
             input_feature_train_arr = transformation_pipleine.transform(input_feature_train_df)
             input_feature_test_arr = transformation_pipleine.transform(input_feature_test_df)
+            
 
-
-            smt = SMOTETomek(sampling_strategy="minority")
+            smt = SMOTETomek(random_state=42)
             logging.info(f"Before resampling in training set Input: {input_feature_train_arr.shape} Target:{target_feature_train_arr.shape}")
             input_feature_train_arr, target_feature_train_arr = smt.fit_resample(input_feature_train_arr, target_feature_train_arr)
             logging.info(f"After resampling in training set Input: {input_feature_train_arr.shape} Target:{target_feature_train_arr.shape}")
@@ -113,4 +114,5 @@ class DataTransformation:
             return data_transformation_artifact
         except Exception as e:
             raise SensorException(e, sys)
-        
+
+            
