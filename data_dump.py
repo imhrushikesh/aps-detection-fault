@@ -1,8 +1,11 @@
 import pymongo
 import pandas as pd
 import json
+from dotenv import load_dotenv
+print(f"Loading environment variable from .env file")
+load_dotenv()
 # Provide the mongodb localhost url to connect python to mongodb.
-client = pymongo.MongoClient("mongodb://localhost:27017/neurolabDB")
+client = pymongo.MongoClient("mongodb+srv://Hrushikesh:rishi0707@cluster0.hadmu.mongodb.net/?retryWrites=true&w=majority")
 
 DATA_FILE_PATH="/config/workspace/aps_failure_training_set1.csv"
 DATABASE_NAME="aps"
