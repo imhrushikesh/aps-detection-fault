@@ -18,4 +18,5 @@ PYAML
 numpy
 xgboost==1.6.2
 scikit-learn
+apache-airflow
 -e .
